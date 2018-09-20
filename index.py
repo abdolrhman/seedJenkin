@@ -11,10 +11,13 @@ password='9518662951'
 db_name = 'jenkins.db' ## sqlite database path
 createTable = "CREATE TABLE jenkins(id int,job_name varchar(32), status char(12), date_checked date)"
 
-# check db name already exist
-# if os.path.isfile(db_name):
-# 	print ('database name already exist')
-# 	raise SystemExit(0)
+# check db name already exist, delete file to not raze error each time the script is Run
+if os.path.isfile(db_name):
+    try:
+        os.remove(db_name)
+    except OSError:
+        pass
+	# raise SystemExit(0)
 
 
 def create_connection(db_name):
